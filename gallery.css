@@ -1,0 +1,109 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #fff8ed;
+  color: #333;
+}
+
+.gallery-header {
+  background: linear-gradient(135deg, #ffcf70, #ff9f9f);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.gallery-header h1 {
+  font-size: 38px;
+  margin-bottom: 12px;
+}
+
+.gallery-header p {
+  margin-bottom: 20px;
+}
+
+.home-button {
+  background: white;
+  color: #333;
+  border: none;
+  padding: 13px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.home-button:hover {
+  background: #333;
+  color: white;
+  transform: scale(1.05);
+}
+
+.gallery-container {
+  width: 96%;
+  max-width: 1800px;
+  margin: 30px auto;
+}
+
+#imageCount {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.happy-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.happy-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.happy-card:hover {
+  transform: translateY(-5px);
+}
+
+.happy-card img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+.happy-card p {
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .happy-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-header h1 {
+    font-size: 28px;
+  }
+
+  .happy-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .happy-card img {
+    height: 160px;
+  }
+}

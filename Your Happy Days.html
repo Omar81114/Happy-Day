@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Happy Days</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Share Your Happy Days!</h1>
+        <p>Your memories deserve to be shared.</p>
+    </header>
+
+    <div class="container">
+
+        <h2>Write Your Story</h2>
+        <p id="welcomeMessage"></p>
+
+        <form id="happyForm">
+
+            <label for="storyTitle">1. Title of Your Happy Day:</label>
+            <input
+                type="text"
+                id="storyTitle"
+                maxlength="100"
+                placeholder="Give your happy day a title..."
+                required
+            >
+
+            <label for="happyDays">2. Event or Activity:</label>
+            <textarea
+                id="happyDays"
+                rows="5"
+                placeholder="Describe the event or activity..."
+                required
+            ></textarea>
+
+            <label for="specialReason">3. Why It Was Special:</label>
+            <textarea
+                id="specialReason"
+                rows="4"
+                placeholder="Explain why this moment was special..."
+                required
+            ></textarea>
+
+            <label for="interestingDetails">4. Interesting Details:</label>
+            <textarea
+                id="interestingDetails"
+                rows="4"
+                placeholder="Include interesting details..."
+                required
+            ></textarea>
+
+            <label for="happyPhoto">Add a Picture (optional):</label>
+            <input
+                type="file"
+                id="happyPhoto"
+                accept="image/*"
+                capture="user"
+            >
+
+            <p class="small-note">
+                You can take a picture or choose one from your device.
+            </p>
+
+            <img
+                id="photoPreview"
+                alt="Your selected picture"
+                class="photo-preview"
+                hidden
+            >
+
+            <button type="submit" class="submit-button">
+                Share My Happy Moment
+            </button>
+
+            <p id="formMessage" role="status"></p>
+
+            <div class="button-container">
+    <button type="button" id="homeButton" onclick="goHome()">
+        Back to Home
+    </button>
+
+    <button type="button" id="logoutButton">
+        Sign Out
+    </button>
+</div>
+        </form>
+
+
+
+<label for="userLocation">Your City (optional):</label>
+<input type="text" id="userLocation"
+    placeholder="Example: Sharjah">
+
+<label>
+    <input type="checkbox" id="showEmail">
+    I agree to display my email publicly so people can send me compliments.
+</label>
+
+
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="gallery.js"></script>
+
+</body>
+</html>

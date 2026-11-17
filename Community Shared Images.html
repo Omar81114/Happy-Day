@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Shared Images - Happy Day</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Community Shared Images!</h1>
+        <p>Explore the pictures shared by our community.</p>
+    </header>
+
+    <div class="container">
+
+        <h2>Our Happy Memories Gallery</h2>
+
+        <p>
+            Here are pictures that people have shared
+            with their happy-day stories!
+        </p>
+
+        <div id="imagesContainer" class="images-container"></div>
+
+        <a class="button" href="Community Happy Days.html">
+            Back to Community Stories
+        </a>
+
+        <a class="button" href="index.html">
+            Back to Home
+        </a>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Happy Day | Created by Omar Sallam</p>
+    </footer>
+
+    <script>
+        const container = document.getElementById("imagesContainer");
+
+        let stories = [];
+
+        try {
+            stories = JSON.parse(
+                localStorage.getItem("happyDayStories")
+            ) || [];
+        } catch (error) {
+            stories = [];
+        }
+
+        const storiesWithImages = stories.filter(story => story.photo);
+
+        if (storiesWithImages.length === 0) {
+            container.innerHTML = `
+                <p>No pictures have been shared yet.
+                Be the first to share a happy memory!</p>
+            `;
+        } else {
+            storiesWithImages.forEach(story => {
+                const card = document.createElement("div");
+                card.className = "image-card";
+
+                const image = document.createElement("img");
+                image.src = story.photo;
+                image.alt = story.title || "Shared happy memory";
+
+                const title = document.createElement("h3");
+                title.textContent = story.title || "A Happy Memory";
+
+                const name = document.createElement("p");
+                name.textContent = "Shared by: " + (story.name || "Anonymous");
+
+                card.appendChild(image);
+                card.appendChild(title);
+                card.appendChild(name);
+
+                container.appendChild(card);
+            });
+        }
+    </script>
+
+</body>
+</html>
