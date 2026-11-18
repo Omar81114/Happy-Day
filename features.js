@@ -424,3 +424,22 @@ document.addEventListener("DOMContentLoaded", () => {
     hdStartQuiz();
     hdUpdateStats();
 });
+const showFeaturesButton = document.getElementById("showFeaturesButton");
+const yourFeaturesSection = document.getElementById("yourFeaturesSection");
+
+if (showFeaturesButton && yourFeaturesSection) {
+    showFeaturesButton.addEventListener("click", () => {
+        yourFeaturesSection.hidden = !yourFeaturesSection.hidden;
+
+        showFeaturesButton.textContent = yourFeaturesSection.hidden
+            ? "✨ Your Features"
+            : "✖ Close Features";
+
+        if (!yourFeaturesSection.hidden) {
+            yourFeaturesSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
+}

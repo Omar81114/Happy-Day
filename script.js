@@ -501,3 +501,135 @@ if (reflectionForm) {
         document.getElementById("reflectionSuccess").hidden = false;
     });
 }
+// HAPPY DAY ACCOUNT PANEL
+
+const accountButton = document.getElementById("accountButton");
+const accountPanel = document.getElementById("accountPanel");
+const accountName = document.getElementById("accountName");
+const accountEmail = document.getElementById("accountEmail");
+const newPassword = document.getElementById("newPassword");
+const profileUpload = document.getElementById("profileUpload");
+const profilePreview = document.getElementById("profilePreview");
+const saveAccountButton = document.getElementById("saveAccountButton");
+const accountMessage = document.getElementById("accountMessage");
+
+let currentHappyUser = JSON.parse(localStorage.getItem("happyUser")) || null;
+
+if (accountButton && accountPanel) {
+    accountButton.addEventListener("click", () => {
+        accountPanel.hidden = !accountPanel.hidden;
+
+        currentHappyUser = JSON.parse(localStorage.getItem("happyUser")) || null;
+
+        if (currentHappyUser) {
+            accountName.value = currentHappyUser.name || "";
+            accountEmail.value = currentHappyUser.email || "";
+
+            if (currentHappyUser.profilePicture) {
+                profilePreview.src = currentHappyUser.profilePicture;
+            } else {
+                profilePreview.removeAttribute("src");
+            }
+
+            accountMessage.textContent = "";
+        } else {
+            accountMessage.textContent = "Please sign in to manage your account.";
+        }
+    });
+}
+
+// Preview the selected profile picture
+if (profileUpload) {
+    profileUpload.addEventListener("change", () => {
+        const file = profileUpload.files[0];
+
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            accountMessage.textContent = "Please choose an image file.";
+            return;
+        }
+
+        // Keep the image small so it fits in localStorage.
+        if (file.size > 1.5 * 1024 * 1024) {
+            accountMessage.textContent = "Please choose an image smaller than 1.5 MB.";
+            profileUpload.value = "";
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            profilePreview.src = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+// Save account changes
+if (saveAccountButton) {
+    saveAccountButton.addEventListener("click", () => {
+        currentHappyUser = JSON.parse(localStorage.getItem("happyUser")) || null;
+
+        if (!currentHappyUser) {
+            accountMessage.textContent = "Please sign in first.";
+            return;
+        }
+
+        const oldEmail = currentHappyUser.email;
+        const updatedName = accountName.value.trim();
+        const updatedEmail = accountEmail.value.trim();
+        const updatedPassword = newPassword.value;
+
+        if (!updatedName || !updatedEmail) {
+            accountMessage.textContent = "Please enter your name and email.";
+            return;
+        }
+
+        let accounts = JSON.parse(localStorage.getItem("happyAccounts")) || [];
+
+        const accountIndex = accounts.findIndex(
+            account => account.email === oldEmail
+        );
+
+        if (accountIndex === -1) {
+            accountMessage.textContent = "Account not found. Please sign in again.";
+            return;
+        }
+
+        const emailAlreadyUsed = accounts.some(
+            (account, index) =>
+                account.email.toLowerCase() === updatedEmail.toLowerCase() &&
+                index !== accountIndex
+        );
+
+        if (emailAlreadyUsed) {
+            accountMessage.textContent = "That email is already being used.";
+            return;
+        }
+
+        // Update account details
+        accounts[accountIndex].name = updatedName;
+        accounts[accountIndex].email = updatedEmail;
+
+        if (updatedPassword.trim() !== "") {
+            accounts[accountIndex].password = updatedPassword;
+        }
+
+        const updatedUser = {
+            ...currentHappyUser,
+            name: updatedName,
+            email: updatedEmail,
+            profilePicture: profilePreview.src.startsWith("data:image/")
+                ? profilePreview.src
+                : currentHappyUser.profilePicture || ""
+        };
+
+        localStorage.setItem("happyAccounts", JSON.stringify(accounts));
+        localStorage.setItem("happyUser", JSON.stringify(updatedUser));
+
+        newPassword.value = "";
+        accountMessage.textContent = "Your account has been updated!";
+    });
+}

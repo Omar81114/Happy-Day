@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Avatar | Happy Day</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .avatar-page {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .avatar-card {
+            background: white;
+            border: 2px solid #d7e9fa;
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            color: #285b96;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .avatar-card:hover {
+            border-color: #3784d0;
+            transform: translateY(-4px);
+        }
+
+        .avatar-card.selected {
+            border: 3px solid #1769aa;
+            background: #eaf4ff;
+        }
+
+        .avatar-card img {
+            width: 110px;
+            height: 110px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        #selectedMessage {
+            color: #1769aa;
+            font-weight: bold;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Choose Your Avatar!</h1>
+    <p>Pick a cartoon character that represents you.</p>
+</header>
+
+<main class="avatar-page">
+    <h2>50 Happy Day Avatars 🎉</h2>
+
+    <p id="selectedMessage">Choose your favourite character!</p>
+
+    <div class="avatar-grid" id="avatarGrid"></div>
+
+    <br>
+    <a href="index.html" class="button">Back to Home</a>
+</main>
+
+<script>
+const avatarNames = [
+    "Happy Guy", "Lets Play Guy", "Smiley Sam", "Giggle King",
+    "Captain Sunshine", "Dancing Dude", "Football Fan", "Super Smiler",
+    "Silly Banana", "Mr Happiness", "Cheeky Charlie", "Pizza Pal",
+    "Happy Ninja", "Rainbow Kid", "Jolly Jordan", "Laughing Leo",
+    "Captain Giggles", "Cool Coder", "Sunny Side", "Bouncy Ben",
+    "Mega Smiles", "Joke Master", "Happy Hipster", "Cookie Monster",
+    "Friendly Fox", "Super Soccer", "Chill Champ", "Funny Freddie",
+    "Great Grinner", "Bubble Buddy", "Happy Hopper", "Star Player",
+    "Silly Scientist", "Disco Dave", "Mr Sunshine", "Laugh Out Loud",
+    "Kind King", "Crazy Cupcake", "Smiley Explorer", "Happy Hero",
+    "Jumpy Jack", "Awesome Artist", "Cheerful Champ", "Giggle Buddy",
+    "Fun Genius", "Happy Explorer", "Friendly Gamer", "Captain Kindness",
+    "Joyful Joker", "Ultimate Smiler"
+];
+
+const grid = document.getElementById("avatarGrid");
+const message = document.getElementById("selectedMessage");
+
+let selectedAvatar = localStorage.getItem("happyAvatar");
+
+avatarNames.forEach((name, index) => {
+
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "avatar-card";
+
+    const image = document.createElement("img");
+
+    const avatarImage =
+        "https://api.dicebear.com/9.x/adventurer/svg?seed=" +
+        encodeURIComponent(name);
+
+    image.src = avatarImage;
+    image.alt = name;
+
+    image.onerror = function() {
+        image.style.display = "none";
+        card.insertAdjacentText("afterbegin", "😊 ");
+    };
+
+    const title = document.createElement("div");
+    title.textContent = name;
+
+    card.appendChild(image);
+    card.appendChild(title);
+
+    if (selectedAvatar === String(index)) {
+        card.classList.add("selected");
+    }
+
+    card.addEventListener("click", function() {
+
+        selectedAvatar = String(index);
+
+        localStorage.setItem("happyAvatar", selectedAvatar);
+        localStorage.setItem("happyAvatarName", name);
+        localStorage.setItem("happyAvatarPicture", avatarImage);
+
+        document.querySelectorAll(".avatar-card").forEach(item => {
+            item.classList.remove("selected");
+        });
+
+        card.classList.add("selected");
+
+        message.textContent =
+            "🎉 You selected " + name + "! Your avatar has been saved.";
+
+    });
+
+    grid.appendChild(card);
+});
+</script>
+
+</body>
+</html>

@@ -640,3 +640,204 @@ footer {
     cursor: pointer;
     margin: 0;
 }
+.account-area {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.account-button {
+    background: #1769aa;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.account-panel {
+    background: white;
+    color: #17324d;
+    width: 280px;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+}
+
+.account-panel[hidden] {
+    display: none;
+}
+
+.account-panel label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.account-panel input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px;
+    margin-top: 5px;
+    border: 1px solid #b8cde0;
+    border-radius: 7px;
+}
+
+.profile-preview {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 10px auto;
+    background: #e6f2ff;
+}
+
+.logout-button {
+    background: #d9534f;
+}
+
+.hd-dashboard-area {
+    margin: 30px auto;
+    padding: 25px;
+    max-width: 1100px;
+    background: #f0f7ff;
+    border-radius: 16px;
+}
+
+.hd-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.hd-panel {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 600px) {
+    .account-area {
+        top: 10px;
+        right: 10px;
+    }
+
+    .account-panel {
+        width: min(280px, calc(100vw - 40px));
+    }
+}
+.main-header {
+    position: relative;
+    background: #285b96;
+    color: white;
+    text-align: center;
+    padding: 90px 20px 55px;
+    box-sizing: border-box;
+}
+
+.main-header h1 {
+    margin-top: 0;
+}
+
+.settings-container {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.settings-button {
+    background: #3784d0;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.settings-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 180px;
+    padding: 10px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 18px #0003;
+}
+
+.settings-menu[hidden] {
+    display: none;
+}
+
+.settings-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 8px;
+    background: #eaf4ff;
+    color: #1769aa;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.settings-menu button:hover {
+    background: #d5eaff;
+}
+
+.settings-menu .logout-button {
+    background: #dc3545;
+    color: white;
+}
+
+.settings-menu .logout-button:hover {
+    background: #b92332;
+}
+
+@media (max-width: 500px) {
+    .settings-container {
+        right: 12px;
+        top: 12px;
+    }
+
+    .main-header {
+        padding-top: 85px;
+    }
+}
+/* Keep Settings and My Account separate */
+.settings-container {
+    position: absolute;
+    top: 15px;
+    right: 215px;
+    z-index: 9999;
+}
+
+.account-area {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Mobile layout */
+@media (max-width: 500px) {
+    .settings-container {
+        right: auto;
+        left: 10px;
+        top: 12px;
+    }
+
+    .account-area {
+        right: 10px;
+        top: 12px;
+    }
+}

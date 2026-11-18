@@ -10,10 +10,67 @@
 </head>
 <body>
 
-    <header>
-        <h1>Welcome to Happy Day!</h1>
-        <p>Discover happiness, one memory at a time.</p>
-    </header>
+
+
+    <div class="account-area">
+    <button id="accountButton" class="account-button">
+        👤 My Account
+    </button>
+
+    <div id="accountPanel" class="account-panel" hidden>
+        <h2>My Account</h2>
+
+        <img id="profilePreview"
+             class="profile-preview"
+             alt="Your profile picture">
+
+        <label for="profileUpload">Choose a profile picture:</label>
+        <input type="file" id="profileUpload" accept="image/*">
+
+        <label for="accountName">Name:</label>
+        <input type="text" id="accountName">
+
+        <label for="accountEmail">Email:</label>
+        <input type="email" id="accountEmail">
+
+        <label for="newPassword">New password (optional):</label>
+        <input type="password" id="newPassword"
+               placeholder="Enter a new password">
+
+        <button id="saveAccountButton" class="button">
+            Save Changes
+        </button>
+
+        <p id="accountMessage" role="status"></p>
+
+        <button id="logoutButton" class="button logout-button">
+            Log Out
+        </button>
+    </div>
+</div>
+
+   <header class="main-header">
+
+    <div class="settings-container">
+        <button id="settingsButton" class="settings-button">
+            ⚙️ Settings
+        </button>
+
+        <div id="settingsMenu" class="settings-menu" hidden>
+            <button id="avatarButton">🧑 Avatar</button>
+            <button id="chatButton">💬 Chat</button>
+            <button id="settingsLogoutButton" class="logout-button">
+                Log Out
+            </button>
+        </div>
+    </div>
+
+    <h1>Welcome to Happy Day!</h1>
+    <p>Discover happiness, one memory at a time.</p>
+
+</header>
+
+
 
     <div class="container">
         <h2>About Happy Day</h2>
@@ -74,12 +131,121 @@
 <a class="button" href="Happy People Gallery.html">
     View Happy People Gallery
 </a>
+<button class="button" id="showFeaturesButton">
+    ✨ Your Features
+</button>
+<section id="yourFeaturesSection" hidden>
+    <h2>Your Happiness Features</h2>
+    <p>Explore all the ways to celebrate happiness!</p>
+
+    <div class="hd-dashboard">
+
+        <div class="hd-panel">
+            <h3>😊 Daily Happiness Check-in</h3>
+            <form id="moodForm">
+                <select id="moodChoice" required>
+                    <option value="">How are you feeling today?</option>
+                    <option>Happy</option>
+                    <option>Excited</option>
+                    <option>Relaxed</option>
+                    <option>Okay</option>
+                    <option>Sad</option>
+                </select>
+                <button class="button" type="submit">Save Mood</button>
+            </form>
+            <p id="moodMessage"></p>
+        </div>
+
+        <div class="hd-panel">
+            <h3>💬 Quote of the Day</h3>
+            <p id="dailyQuote">Your daily quote will appear here.</p>
+        </div>
+
+        <div class="hd-panel">
+            <h3>🫙 Happiness Jar</h3>
+            <p>Revisit one of your favourite memories.</p>
+            <button id="openJarButton" class="button">Open My Jar</button>
+            <p id="jarMemory"></p>
+        </div>
+
+        <div class="hd-panel">
+            <h3>🏅 Happiness Badges</h3>
+            <div id="badgeList"></div>
+        </div>
+
+        <div class="hd-panel">
+            <h3>💙 Random Kindness Challenge</h3>
+            <p id="kindnessChallenge"></p>
+            <button id="challengeDoneButton" class="button">I Did It!</button>
+            <p id="challengeMessage"></p>
+        </div>
+
+        <div class="hd-panel">
+            <h3>🌍 Happiness Around the World</h3>
+            <div id="worldLocations"></div>
+        </div>
+
+        <div class="hd-panel">
+            <h3>📅 My Happiness Timeline</h3>
+            <div id="myTimeline"></div>
+        </div>
+
+        <div class="hd-panel">
+            <h3>❤️ Community Reactions</h3>
+            <p>React to other people's happy memories in the community section!</p>
+        </div>
+
+        <div class="hd-panel">
+            <h3>🧠 Happiness Quiz</h3>
+            <div id="happinessQuiz"></div>
+            <p id="quizResult"></p>
+        </div>
+
+        <div class="hd-panel">
+            <h3>📊 Happiness Statistics</h3>
+            <p>Stories: <span id="statStories">0</span></p>
+            <p>Locations: <span id="statLocations">0</span></p>
+            <p>Check-ins: <span id="statCheckins">0</span></p>
+            <p>Challenges completed: <span id="statChallenges">0</span></p>
+            <p>Quiz score: <span id="statQuiz">0</span></p>
+        </div>
+
+    </div>
+</section>
     </div>
 
     <footer>
         <p>© 2026 Happy Day | Created by Omar Sallam</p>
     </footer>
     <script src="features.js"></script>
+    <script src="script.js"></script>
 
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const settingsButton = document.getElementById("settingsButton");
+    const settingsMenu = document.getElementById("settingsMenu");
+
+    settingsButton.addEventListener("click", function () {
+        settingsMenu.hidden = !settingsMenu.hidden;
+    });
+
+    document.getElementById("avatarButton").addEventListener("click", function () {
+        window.location.href = "avatars.html";
+    });
+
+    document.getElementById("chatButton").addEventListener("click", function () {
+        window.location.href = "chat.html";
+    });
+
+    document.getElementById("settingsLogoutButton").addEventListener("click", function () {
+        if (confirm("Are you sure you want to log out?")) {
+            localStorage.removeItem("happyUser");
+            window.location.href = "index.html";
+        }
+    });
+
+});
+</script>
 </body>
 </html>
